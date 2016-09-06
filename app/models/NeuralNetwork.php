@@ -34,7 +34,30 @@ class NeuralNetwork extends Model
             default:
                 throw new Exception('Unknown layer');
         }
+    }
 
+    /**
+     * Initialize the neural network with layers
+     *
+     * @param integer $nbInput  Nb of input neurons
+     * @param integer $nbHidden Nb of hidden neurons
+     * @param integer $nbOutput Nb of output neurons
+     *
+     * @throws Exception
+     */
+    public function initialize($nbInput, $nbHidden, $nbOutput) {
+
+        for($i=0; $i<$nbInput; $i++) {
+            $this->addNeural('input');
+        }
+
+        for($i=0; $i<$nbHidden; $i++) {
+            $this->addNeural('hidden');
+        }
+
+        for($i=0; $i<$nbOutput; $i++) {
+            $this->addNeural('output');
+        }
     }
 
 
