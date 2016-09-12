@@ -8,14 +8,33 @@ use Phalcon\Mvc\Model;
 
 class NeuralNetwork extends Model
 {
+    /**
+     * Hash of Input Neural Objects
+     *
+     * @var array of Neural
+     */
     private $inputHash;
+
+    /**
+     * Hash of Hidden Neural Objects
+     *
+     * @var array of Neural
+     */
     private $hiddenHash;
+
+    /**
+     * Hash of Ouput Neural Objects
+     *
+     * @var array of Neural
+     */
     private $outputHash;
 
     /**
      * Adding a neural to the neural network
      *
      * @param String $type
+     *
+     * @throws Exception
      */
     public function addNeural($type) {
 
