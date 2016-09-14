@@ -1,0 +1,22 @@
+###############################################################################
+#                          Generated on phpdocker.io                          #
+###############################################################################
+
+ai-webserver:
+  image: phpdockerio/nginx:latest
+  container_name: ai-webserver
+  volumes:
+      - ..:/var/www/ai
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+  ports:
+   - "8383:80"
+  links:
+   - ai-php-fpm
+
+ai-php-fpm:
+  build: .
+  dockerfile: php-fpm/Dockerfile
+  container_name: ai-php-fpm
+  volumes:
+    - ..:/var/www/ai
+    - ./php-fpm/php-ini-overrides.ini:/etc/php5/fpm/conf.d/99-overrides.ini
