@@ -6,6 +6,7 @@
 
 use Phalcon\Mvc\Model;
 
+
 class NeuralNetwork extends Model
 {
     /**
@@ -30,6 +31,21 @@ class NeuralNetwork extends Model
     private $outputHash;
 
     /**
+     * Links between input and hidden neurons
+     *
+     * @var array of NeuralLink
+     */
+    private $inputHiddenLinkHash;
+
+
+    /**
+     * Links between hidden and output neurons
+     *
+     * @var array of NeuralLink
+     */
+    private $hiddenOutputLinkHash;
+
+    /**
      * Adding a neural to the neural network
      *
      * @param String $type
@@ -39,21 +55,57 @@ class NeuralNetwork extends Model
     public function addNeural($type) {
 
         $neuralModel = new Neural();
+        $neuralModel->setType($type);
 
         switch($type) {
             case 'input':
+                $neuralModel = $this->linkTo($neuralModel, 'hidden'); // Link the input neural to hidden neurals
                 $this->inputHash[] = $neuralModel;
                 break;
             case 'hidden':
+                $neuralModel = $this->linkTo($neuralModel, 'input'); // Link the hidden neural to input neurals
+                $neuralModel = $this->linkTo($neuralModel, 'output'); // Link the hidden neural to input neurals
                 $this->hiddenHash[] = $neuralModel;
                 break;
             case 'output':
+                $neuralModel = $this->linkTo($neuralModel, 'hidden'); // Link the output neural to hidden neurals
                 $this->outputHash[] = $neuralModel;
                 break;
             default:
                 throw new Exception('Unknown layer');
         }
     }
+
+    /**
+     * @param Neural $neuralModel Neural to link to others
+     * @param string $type        Layer name to join to the neural
+     */
+    private function linkTo($neuralModel, $type) {
+
+        switch($type) {
+            case 'input':
+                $targetNeuronHash = $this->inputHash;
+                break;
+            case 'hidden':
+                $targetNeuronHash = $this->hiddenHash;
+                break;
+            case 'output':
+                $targetNeuronHash = $this->outputHash;
+                break;
+            default:
+                throw new Exception('Invalid layer type');
+                break;
+        }
+
+        // Creating the links
+        foreach($targetNeuronHash as $targetNeuron) {
+            $neuralLink = new NeuralLink($neuralModel, $targetNeuron);
+            $neuralModel->addNeuralLink($neuralLink);
+        }
+
+        return $neuralModel;
+    }
+
 
     /**
      * Initialize the neural network with layers
@@ -64,8 +116,7 @@ class NeuralNetwork extends Model
      *
      * @throws Exception
      */
-    public function initialize($nbInput, $nbHidden, $nbOutput) {
-
+    public function initLayers($nbInput, $nbHidden, $nbOutput) {
         for($i=0; $i<$nbInput; $i++) {
             $this->addNeural('input');
         }
@@ -77,6 +128,27 @@ class NeuralNetwork extends Model
         for($i=0; $i<$nbOutput; $i++) {
             $this->addNeural('output');
         }
+    }
+
+    public function __toString()
+    {
+        $s =  "Input layer\n";
+        foreach($this->inputHash as $neural) {
+            $s .= $neural . "\n";
+        }
+
+        $s .=  "Hidden layer\n";
+        foreach($this->hiddenHash as $neural) {
+            $s .= $neural . "\n";
+        }
+
+        $s .=  "Output layer\n";
+        foreach($this->outputHash as $neural) {
+            $s .= $neural . "\n";
+        }
+
+
+        return $s;
     }
 
 

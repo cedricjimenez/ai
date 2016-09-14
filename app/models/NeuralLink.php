@@ -18,21 +18,36 @@ class NeuralLink {
      *
      * @var Neural
      */
-    var $neuralFrom;
+    private $neuralFrom;
 
     /**
      * Neural ending the link
      *
      * @var Neural
      */
-    var $neuralTo;
+    private $neuralTo;
 
     /**
      * Weight between the 2 neurals
      *
      * @var float
      */
-    var $weight;
+    private $weight;
+
+
+    /**
+     * Create a Link between 2 neurals
+     *
+     * @param Neural $neuralFrom
+     * @param Neural $neuralTo
+     */
+    public function __construct(Neural $neuralFrom, Neural $neuralTo)
+    {
+        $this->setNeuralFrom($neuralFrom);
+        $this->setNeuralTo($neuralTo);
+        $this->setWeight(0);
+    }
+
 
     /**
      * @return mixed

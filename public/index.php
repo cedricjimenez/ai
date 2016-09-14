@@ -14,7 +14,11 @@ try {
     $loader->registerDirs([
         '../app/controllers/',
         '../app/models/'
-    ])->register();
+    ])->registerNamespaces(
+        array(
+            "ai\Neural\Neural"    => "app/Models"
+        )
+    )->register();
 
     // Create a DI
     $di = new FactoryDefault();
@@ -32,6 +36,8 @@ try {
         $url->setBaseUri('/ai/');
         return $url;
     });
+
+
 
     $application = new Application($di);
 

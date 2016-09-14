@@ -8,10 +8,11 @@ class IndexController extends Controller
 
     public function indexAction()
     {
-
-
         $nn = new NeuralNetwork();
-        $nn->addNeural('input');
+        $nn->initLayers(2,2,1);
+        $this->view->nnInfos = $nn->__toString();
+
+
 
     }
 }
