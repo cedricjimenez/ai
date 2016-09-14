@@ -4,7 +4,10 @@
  * Date: 12/09/16 13:29
  */
 
+namespace ai;
+
 use Phalcon\Mvc\Model;
+use ai\Neural;
 
 /**
  * Class NeuralLink

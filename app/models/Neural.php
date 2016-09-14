@@ -1,6 +1,7 @@
 <?php
 
 
+namespace ai;
 
 use Phalcon\Mvc\Model;
 

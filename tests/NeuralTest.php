@@ -6,7 +6,7 @@
 
 namespace Tests;
 
-use ai\Neural\Neural;
+use \ai\Neural;
 
 
 class NeuralTest extends \UnitTestCase {

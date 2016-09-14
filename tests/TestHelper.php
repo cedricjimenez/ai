@@ -30,6 +30,12 @@ $loader->registerDirs(
     ]
 );
 
+$loader->registerNamespaces(
+    array(
+        "ai" => "app/models"
+    )
+);
+
 $loader->register();
 
 $di = new FactoryDefault();

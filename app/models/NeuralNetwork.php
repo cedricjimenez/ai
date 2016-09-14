@@ -4,8 +4,10 @@
  * Date: 05/09/16 13:50
  */
 
-use Phalcon\Mvc\Model;
+namespace ai;
 
+use Phalcon\Mvc\Model;
+use ai\Neural;
 
 class NeuralNetwork extends Model
 {
