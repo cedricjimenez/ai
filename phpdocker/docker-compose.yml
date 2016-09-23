@@ -2,6 +2,19 @@
 #                          Generated on phpdocker.io                          #
 ###############################################################################
 
+ai-memcached:
+  image: phpdockerio/memcached:latest
+  container_name: ai-memcached
+
+ai-mysql:
+  image: mysql:5.7
+  container_name: ai-mysql
+  environment:
+    - MYSQL_ROOT_PASSWORD=%C3dr1c%
+    - MYSQL_DATABASE=aidb
+    - MYSQL_USER=aiadmin
+    - MYSQL_PASSWORD=%C3dr1c%
+
 ai-webserver:
   image: phpdockerio/nginx:latest
   container_name: ai-webserver
@@ -20,3 +33,6 @@ ai-php-fpm:
   volumes:
     - ..:/var/www/ai
     - ./php-fpm/php-ini-overrides.ini:/etc/php5/fpm/conf.d/99-overrides.ini
+  links:
+    - ai-memcached
+    - ai-mysql

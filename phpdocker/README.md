@@ -36,11 +36,11 @@ Simply `cd` to the folder where you placed the files, then `vagrant up`. This wi
 
 ##Services exposed outside your environment##
 
-You can access your application via **`localhost`**, if you're running the containers directly, or through **`192.168.33.191`** when run on a vm. nginx and mailhog both respond to any hostname, in case you want to add your own hostname on your `/etc/hosts` 
+You can access your application via **`localhost`**, if you're running the containers directly, or through **`192.168.33.28`** when run on a vm. nginx and mailhog both respond to any hostname, in case you want to add your own hostname on your `/etc/hosts` 
 
 Service|Address outside containers|Address outside VM
 ------|---------|-----------
-Webserver|[localhost:8383](http://localhost:8383)|[192.168.33.191](http://192.168.33.191)
+Webserver|[localhost:8383](http://localhost:8383)|[192.168.33.28](http://192.168.33.28)
 
 ##Hosts within your environment##
 
@@ -49,6 +49,8 @@ You'll need to configure your application to use any services you enabled:
 Service|Hostname|Port number
 ------|---------|-----------
 php-fpm|ai-php-fpm|9000
+MySQL|ai-mysql|3306 (default)
+Memcached|ai-memcached|11211 (default)
 
 #Docker compose cheatsheet#
 
