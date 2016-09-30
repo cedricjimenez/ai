@@ -24,9 +24,9 @@ class IndexController extends Controller
             ->join(true);
 
 
-        $nn = new NeuralNetwork();
-        $nn->initLayers(2,2,1);
-        $this->view->neuralnetwork = $nn;
+        $neuralNetwork = new NeuralNetwork();
+        $neuralNetwork->initLayers(2,2,1);
+        $this->view->neuralnetwork = $neuralNetwork;
 
 
 
