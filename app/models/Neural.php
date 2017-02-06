@@ -38,6 +38,15 @@ class Neural extends Model
     }
 
     /**
+     * Returns an array of neural links
+     *
+     * @return Array NeuralLink
+     */
+    public function getNeuralLinkHash() {
+        return $this->neuralLinkHash;
+    }
+
+    /**
      * Return the neuron signature
      */
     public function __toString() {

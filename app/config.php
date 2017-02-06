@@ -5,7 +5,7 @@
  */
 
 
-use Phalcon\Loader;
+use \Phalcon\Loader;
 use Phalcon\Di\FactoryDefault;
 use Phalcon\Mvc\View;
 use Phalcon\Mvc\Application;
@@ -13,14 +13,21 @@ use Phalcon\Mvc\Url as UrlProvider;
 use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
 
 
+// Required for phalcon/incubator
+include "../vendor/autoload.php";
+
+
 // Register an autoloader
 $loader = new Loader();
+
+
 $loader->registerDirs([
     '../app/controllers/',
-    '../app/models/'
+    '../app/models/',
+    '../tests/'
 ])->registerNamespaces(
     array(
-        "ai" => "../app/models"
+        "ai"   => "../app/models/"
     )
 )->register();
 
@@ -40,6 +47,34 @@ $di->set('url', function () {
     $url->setBaseUri('/ai/');
     return $url;
 });
+
+/**
+ * Database config
+ */
+$di->set(
+    'db',
+    function () {
+        return new DbAdapter(
+            [
+                'host' => 'ai-mysql',
+                'username' => 'aiadmin',
+                'password' => '%C3dr1c%',
+                'dbname' => 'aidb'
+            ]
+        );
+    },
+    true
+);
+
+
+$di->set(
+    'modelsManager',
+    function()
+    {
+        return new \Phalcon\Mvc\Model\Manager();
+    }
+);
+
 
 
 

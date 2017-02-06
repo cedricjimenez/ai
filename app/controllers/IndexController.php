@@ -28,6 +28,10 @@ class IndexController extends Controller
         $nn->initLayers(2,2,1);
         $this->view->neuralnetwork = $nn;
 
+        $neural = new \ai\Neural();
+        $neural->save();
+
+
 
 
     }

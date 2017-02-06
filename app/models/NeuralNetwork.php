@@ -16,21 +16,21 @@ class NeuralNetwork extends Model
      *
      * @var array of Neural
      */
-    private $inputHash;
+    private $inputHash = [];
 
     /**
      * Hash of Hidden Neural Objects
      *
      * @var array of Neural
      */
-    private $hiddenHash;
+    private $hiddenHash = [];
 
     /**
      * Hash of Ouput Neural Objects
      *
      * @var array of Neural
      */
-    private $outputHash;
+    private $outputHash = [];
 
     /**
      * Links between input and hidden neurons
@@ -153,5 +153,15 @@ class NeuralNetwork extends Model
         return $s;
     }
 
-
+    /**
+     * Returns the appropriate layer
+     *
+     * @param String $type
+     * @return mixed
+     */
+    public function getLayer($type)
+    {
+        $layerName = $type . 'Hash';
+        return $this->$layerName;
+    }
 }
