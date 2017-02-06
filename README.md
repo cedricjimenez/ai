@@ -1,6 +1,8 @@
 # ai
 Artificial Intelligence with PHP &amp; Phalcon
 
+[![Code Climate](https://codeclimate.com/github/ceji/ai/badges/gpa.svg)](https://codeclimate.com/github/ceji/ai) [![Test Coverage](https://codeclimate.com/github/ceji/ai/badges/coverage.svg)](https://codeclimate.com/github/ceji/ai/coverage)
+
 * Run
 
 ``` 
